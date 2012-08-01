@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<package packagerversion="1.7.2" version="2.0" xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0 http://pear.php.net/dtd/tasks-1.0.xsd http://pear.php.net/dtd/package-2.0 http://pear.php.net/dtd/package-2.0.xsd">
+<package packagerversion="1.9.4" version="2.0" xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0
+    http://pear.php.net/dtd/tasks-1.0.xsd
+    http://pear.php.net/dtd/package-2.0
+    http://pear.php.net/dtd/package-2.0.xsd">
  <name>Create_KML</name>
  <channel>pear.php.net</channel>
  <summary>Class to create KML code from a set of data</summary>
@@ -10,18 +13,19 @@
   <email>hamstar@telescum.co.nz</email>
   <active>yes</active>
  </lead>
- <date>2009-10-17</date>
- <time>16:04:57</time>
+ <date>2012-08-01</date>
+ <time>20:31:34</time>
  <version>
-  <release>1.0.1</release>
-  <api>1.0.1</api>
+  <release>0.1.0</release>
+  <api>0.1.0</api>
  </version>
  <stability>
-  <release>beta</release>
-  <api>beta</api>
+  <release>alpha</release>
+  <api>alpha</api>
  </stability>
  <license uri="http://www.gnu.org/copyleft/lesser.html">LGPL License 2.1</license>
- <notes>Various fixes and changes as suggested from the comments on proposal.
+ <notes>
+Various fixes and changes as suggested from the comments on proposal.
 * The function to create the KML code now uses the SimpleXML class.
 * Function to create KML code is now in the magic __toString() method under the XML_KML_Create
 * Removed the save() method
@@ -31,28 +35,74 @@
 * Changed class name KMLPlace to XML_KML_Place
 * Changed class name KMLStyle to XML_KML_Style
 * Implemented set*() methods on XML_KML_Style and XML_KML_Place that validate input
-* Code now adheres to PHPCodeSniffer standards</notes>
+* Code now adheres to PHPCodeSniffer standards
+ </notes>
  <contents>
-  <dir baseinstalldir="XML" name="/">
-   <file baseinstalldir="XML" md5sum="e9f0fb2e85342d4308d1309269963a24" name="Main.php" role="php"/>
-   <file baseinstalldir="XML" md5sum="9d71023a19e1415585cf9d98590529c8" name="KML/Place.php" role="php"/>
-   <file baseinstalldir="XML" md5sum="42e962925950a3347ddf5cca8a12e221" name="KML/Style.php" role="php"/>
-   <file baseinstalldir="XML" md5sum="b114bb4d267a41384a51d6ab6b4587ff" name="examples/example.php" role="doc" />
-   <file baseinstalldir="XML" md5sum="218c56d4646d7beaa627929900ce654b" name="examples/output.kml" role="doc" />
-  </dir>
+  <dir baseinstalldir="/" name="/">
+   <dir name="docs">
+    <file name="README.md" role="doc">
+     <tasks:replace from="@PEAR-VER@" to="version" type="package-info" />
+    </file>
+   </dir> <!-- /docs -->
+   <dir name="tests">
+    <file name="README.md" role="test">
+     <tasks:replace from="@PEAR-VER@" to="version" type="package-info" />
+    </file>
+    <file name="XMLKMLTestCase.php" role="test">
+     <tasks:replace from="@PEAR-VER@" to="version" type="package-info" />
+    </file>
+   </dir> <!-- /tests -->
+   <dir name="XML">
+    <dir name="KML">
+     <file name="Common.php" role="php">
+      <tasks:replace from="@PEAR-VER@" to="version" type="package-info" />
+     </file>
+     <file name="Create.php" role="php">
+      <tasks:replace from="@PEAR-VER@" to="version" type="package-info" />
+     </file>
+     <file name="Exception.php" role="php">
+      <tasks:replace from="@PEAR-VER@" to="version" type="package-info" />
+     </file>
+     <file name="Place.php" role="php">
+      <tasks:replace from="@PEAR-VER@" to="version" type="package-info" />
+     </file>
+     <file name="Style.php" role="php">
+      <tasks:replace from="@PEAR-VER@" to="version" type="package-info" />
+     </file>
+    </dir> <!-- /XML/KML -->
+   </dir> <!-- /XML -->
+   <file name="README.markdown" role="data">
+    <tasks:replace from="@PEAR-VER@" to="version" type="package-info" />
+   </file>
+  </dir> <!-- / -->
  </contents>
  <dependencies>
   <required>
    <php>
-    <min>5.2.6</min>
+    <min>5.3.0</min>
    </php>
    <pearinstaller>
-    <min>1.7.2</min>
+    <min>1.7.0</min>
    </pearinstaller>
   </required>
  </dependencies>
  <phprelease />
  <changelog>
+  <release>
+   <version>
+    <release>1.0</release>
+    <api>1.0</api>
+   </version>
+   <stability>
+    <release>beta</release>
+    <api>beta</api>
+   </stability>
+   <date>2009-10-01</date>
+   <license uri="http://www.gnu.org/copyleft/lesser.html">LGPL License 2.1</license>
+   <notes>
+initial pear release
+   </notes>
+  </release>
   <release>
    <version>
     <release>1.0.1</release>
@@ -64,7 +114,8 @@
    </stability>
    <date>2009-10-17</date>
    <license uri="http://www.gnu.org/copyleft/lesser.html">LGPL License 2.1</license>
-   <notes>Various fixes and changes as suggested from the comments on proposal.
+   <notes>
+Various fixes and changes as suggested from the comments on proposal.
 * The function to create the KML code now uses the SimpleXML class.
 * Function to create KML code is now in the magic __toString() method under the XML_KML_Create
 * Removed the save() method
@@ -79,16 +130,28 @@
   </release>
   <release>
    <version>
-    <release>1.0</release>
-    <api>1.0</api>
+    <release>0.1.0</release>
+    <api>0.1.0</api>
    </version>
    <stability>
-    <release>beta</release>
-    <api>beta</api>
+    <release>alpha</release>
+    <api>alpha</api>
    </stability>
-   <date>2009-10-01</date>
+   <date>2012-08-01</date>
    <license uri="http://www.gnu.org/copyleft/lesser.html">LGPL License 2.1</license>
-   <notes>initial pear release</notes>
+   <notes>
+Various fixes and changes as suggested from the comments on proposal.
+* The function to create the KML code now uses the SimpleXML class.
+* Function to create KML code is now in the magic __toString() method under the XML_KML_Create
+* Removed the save() method
+* Implemented constructers and destructers
+* Implemented one-class-per-file rule adding Main.php KML/Place.php and KML/Style.php
+* Changed class name KML to XML_KML_Create
+* Changed class name KMLPlace to XML_KML_Place
+* Changed class name KMLStyle to XML_KML_Style
+* Implemented set*() methods on XML_KML_Style and XML_KML_Place that validate input
+* Code now adheres to PHPCodeSniffer standards
+   </notes>
   </release>
  </changelog>
 </package>

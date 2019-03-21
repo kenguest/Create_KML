@@ -29,6 +29,7 @@ To add styles you need to create a new style object, add your style data to it a
 To add a placemark you do the same as for a styles but use a place object.  As such:
 
     // assumes you have $kml setup
+	$foldername = "Places";
 	while ( list($id,$name,$desc,$style_id,$lat,$lng) = mysql_fetch_array($result) ) {
 
 		$place = $kml->createPlace();
@@ -36,7 +37,7 @@ To add a placemark you do the same as for a styles but use a place object.  As s
 		$place->setId($id)
             ->setName($name)
 		    ->setDesc($desc)
-		    ->setFolder()
+		    ->setFolder($foldername)
 		    ->setStyle($style_id)
 		    ->setCoords($lat,$lng);
 
@@ -68,4 +69,4 @@ Or force the user to download the file:
 
 ## Contact
 
-Problems, comments, and suggestions all welcome: [hamstar@telescum.co.nz](mailto:hamstar@telescum.co.nz)
+Problems, comments, and suggestions all welcome: [cairnswm@gmail.com](mailto:cairnswm@gmail.com)

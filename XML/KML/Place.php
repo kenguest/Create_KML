@@ -18,8 +18,8 @@
 *
 */
 
-require_once 'XML/KML/Exception.php';
-require_once 'XML/KML/Common.php';
+require_once 'Exception.php';
+require_once 'Common.php';
 
 /**
 * Class to define a place to be added to the KML class
@@ -33,8 +33,12 @@ require_once 'XML/KML/Common.php';
 class XML_KML_Place extends XML_KML_Common
 {
     private $type = 'place';
-    private $folder = '**[root]**';
+    public $folder = '**[root]**';
     private $id, $name, $desc, $style, $coords;
+	
+	public function getType() {
+		return $this->type;
+	}
 
     /**
     * Encloses a string in CDATA escaping if it

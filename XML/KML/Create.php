@@ -62,6 +62,10 @@ class XML_KML_Create
     {
         $this->reset();
     }
+	
+	public function getType() {
+		return $this->type;
+	}		
 
     /**
      * Autoloader
@@ -164,8 +168,9 @@ class XML_KML_Create
     {
    
         // Set the xml version
-        $xml_head = '<?xml version="1.0" encoding="UTF-8"?>';
-        
+        /* $xml_head = '<?xml version="1.0" encoding="UTF-8"?>'; // Adding this prevents loading to GoogleEarth */
+        $xml_head = '';
+		
         // Open a new KML doc
         $sxe = new SimpleXMLElement(
             '<kml xmlns = "http://earth.google.com/kml/2.1"></kml>'
@@ -212,20 +217,24 @@ class XML_KML_Create
         }
        
         // Set all the root placemarks so they are not in a folder
-        foreach ($this->folders['**[root]**'] as $p) {
-                    
-            // Add all the placemark details
-            $place = $folder->addChild('Placemark');
-            $place->addAttribute('id', $p->getId() );
-            $place->addChild('name', $p->getName() );
-            $place->addChild('description', $p->getDesc() );
-            $place->addChild('styleUrl', $p->getStyle() );
-            
-            // Add coordinates information
-            $point = $place->addChild('Point');
-            $point->addChild('coordinates', $p->getCoords() );
-                
-        }
+		if (isset($this->folders['**[root]**']))
+		{
+			foreach ($this->folders['**[root]**'] as $p) {
+						
+				// Add all the placemark details
+				var_dump($p);
+				$place = $folder->addChild('Placemark');
+				$place->addAttribute('id', $p->getId() );
+				$place->addChild('name', $p->getName() );
+				$place->addChild('description', $p->getDesc() );
+				$place->addChild('styleUrl', $p->getStyle() );
+				
+				// Add coordinates information
+				$point = $place->addChild('Point');
+				$point->addChild('coordinates', $p->getCoords() );
+					
+			}
+		}
         
         // Put the xml into a string
         $kml = $sxe->asXML();

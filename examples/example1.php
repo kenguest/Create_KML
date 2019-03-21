@@ -1,4 +1,6 @@
 <?php
+	// Create a simple KML with a single point
+	
 	// Include the component
 	require_once '../XML/KML/Create.php';
 	

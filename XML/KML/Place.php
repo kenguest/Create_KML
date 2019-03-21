@@ -34,7 +34,7 @@ class XML_KML_Place extends XML_KML_Common
 {
     private $type = 'place';
     public $folder = '**[root]**';
-    private $id, $name, $desc, $style, $coords;
+    private $id, $name, $desc, $style, $coords, $linestring;
 	
 	public function getType() {
 		return $this->type;
@@ -194,6 +194,77 @@ class XML_KML_Place extends XML_KML_Common
     public function getCoords()
     {
         return $this->coords;
+    }
+	
+	/**
+    * Sets the coordinates, checking that they are floats
+    *
+    * @param float $lat Latitude coordinate
+    * @param float $lng Longitude coordinate
+    *
+    * @return XML_KML_Place this objectz
+    * @throws XML_KML_Exception
+    */
+    public function setLinePoint($lat, $lng)
+    {
+
+		// Convert to floats if they are in a string
+		$lat = floatval($lat);
+		$lng = floatval($lng);
+		
+		// Check that they are floats
+		if (is_float($lat) && is_float($lng)) {
+			// Set coords
+			$this->linestring[] = array('lat' => $lat, 'lng' => $lng);
+		}
+		else
+		{
+			// Not a valid set of coordinates
+			throw new XML_KML_Exception("Invalid set of coordinates.");
+		}			
+        return $this;
+    }	
+	
+    /**
+    * Sets the coordinates, checking that they are floats
+    *
+    * @param array $points Array of Points - points are arrays of Lat/Lng array('lat' => '51.01', 'lng = '-115.08') 
+    *
+    * @return XML_KML_Place this objectz
+    * @throws XML_KML_Exception
+    */
+    public function setLinestring($points)
+    {
+		var_dump($points);
+		foreach ($points as $point)
+		{
+			// Convert to floats if they are in a string
+			$lat = floatval($point['lat']);
+			$lng = floatval($point['lng']);
+			
+			// Check that they are floats
+			if (is_float($lat) && is_float($lng)) {
+				// Set coords
+				$this->linestring .= $lat . ',' . $lng . '\n';
+				
+			}
+			else
+			{
+				// Not a valid set of coordinates
+				throw new XML_KML_Exception("Invalid set of coordinates.");
+			}			
+		}
+        return $this;
+    }	
+	
+	/**
+    * Return the linestring of this place
+    *
+    * @return string the coordinates
+    */
+    public function getLinestring()
+    {
+        return $this->linestring;
     }
     
     /**

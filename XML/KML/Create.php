@@ -223,9 +223,26 @@ class XML_KML_Create
                     $place->addChild('description', $p->getDesc() );
                     $place->addChild('styleUrl', $p->getStyle() );
                     
-                    // Add coordinates information
-                    $point = $place->addChild('Point');
-                    $point->addChild('coordinates', $p->getCoords() );
+					$ls = $p->getLinestring();
+					$c = count($ls);
+					if ($c > 0)
+					{
+						// Add coordinates information
+						$linestring = "";
+						foreach ($ls as $p)
+						{
+							$linestring .= $p['lat'] . ',' . $p['lng'] . ',0 ';
+						}
+						$ls = $place->addChild('LineString');
+						$ls->addChild('tessellate',1);
+						$ls->addChild('coordinates', $linestring );
+					}
+					else
+					{
+						// Add coordinates information
+						$point = $place->addChild('Point');
+						$point->addChild('coordinates', $p->getCoords() );
+					}
                 }
             }
         }

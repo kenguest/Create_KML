@@ -49,6 +49,27 @@ To add a placemark you do the same as for a styles but use a place object.  As s
 
 When the setFolder() method is used with nothing in the brackets, means that the placemark will be put in the root of the KML document.  If you want the placemark in a folder then simply enter the folder name (or variable) into the brackets.
 
+### Adding a line to the KML document
+
+To add a line you do the same as for a points but use setLinePoint instead of coords but use a place object. (See Example2) As such:
+
+    // assumes you have $kml setup
+	$foldername = "Places";
+	
+	$place = $kml->createPlace();
+
+	$place->setId($id)
+		->setName($name)
+		->setDesc($desc)
+		->setFolder($foldername)
+		->setStyle($style_id)
+		->setLinePoint($lat,$lng)
+		->setLinePoint($lat2,$lng2); // etc
+
+	$kml->addItem($place);
+
+You can also use setLinestring which takes an array: array('lat' => $lat, 'lng' => $lng)
+
 ### Outputting the KML code
 
 If you wish to display the code in the browser to a user you can use the printHeader(true) method to show it as an XML document.  If you use the method without an argument it sets the header to the Google Earth KML file type, forcing a download of the KML code.

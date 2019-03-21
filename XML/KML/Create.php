@@ -45,7 +45,12 @@ class XML_KML_Create
     * @access protected
     */
     protected $folders = array();
-    
+	
+	/**
+	* Properties of the KML object such as Name and Description
+	*/
+    public $properties = array();
+	
     /**
     * Empty constructor
     *
@@ -63,6 +68,12 @@ class XML_KML_Create
         $this->reset();
     }
 	
+	
+	/**
+    * GetStyle
+    *
+    * @return string
+    */
 	public function getType() {
 		return $this->type;
 	}		
@@ -178,6 +189,9 @@ class XML_KML_Create
         
         // Put document in the kml
         $doc = $sxe->addchild('Document');
+		if (isset($this->properties["name"])) { $doc->addChild('name', $this->properties["name"] );} 
+		if (isset($this->properties["description"])) { $doc->addChild('description', $this->properties["description"] );} 
+		$doc->addChild('created_by', "https://github.com/cairnswm/Create_KML" );
        
         // Set all the styles for the document
         foreach ($this->styles as $s) {

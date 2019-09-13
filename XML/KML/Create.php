@@ -9,8 +9,8 @@
 *
 * @category  XML
 * @package   Create_KML
-* @author    Robert McLeod <hamstar@telescum.co.nz>
-* @copyright 2009 Robert McLeod
+* @author    Robert McLeod <hamstar@telescum.co.nz> Modified by William Cairns <cairnswm@gmail.com>
+* @copyright 2009 Robert McLeod, 2019 William Cairns
 * @license   http://www.gnu.org/copyleft/lesser.html  LGPL License 2.1
 * @version   SVN: 1.0
 * @link      ??
@@ -24,7 +24,7 @@ spl_autoload_register(array('XML_KML_Create', 'autoload'));
 *
 * @category XML
 * @package  Create_KML
-* @author   Robert McLeod <hamstar@telescum.co.nz>
+* @author   Robert McLeod <hamstar@telescum.co.nz>, William Cairns <cairnswm@gmail.com>
 * @license  http://www.gnu.org/copyleft/lesser.html  LGPL License 2.1
 * @link     ??
 */

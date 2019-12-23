@@ -196,6 +196,31 @@ class XML_KML_Place extends XML_KML_Common
         return $this->coords;
     }
 	
+	    /**
+    * Return the coordinates of this place
+    *
+    * @return string the lat
+    */
+    public function getLat()
+    {
+		$c = $this->coords;
+		$cm = strpos($c,",");
+		return substr($c, $cm+1, 100);
+        
+    }
+	
+	    /**
+    * Return the coordinates of this place
+    *
+    * @return string the lng
+    */
+    public function getLng()
+    {
+		$c = $this->coords;
+		$cm = strpos($c,",");
+		return substr($c, 0,$cm-1);
+    }
+	
 	/**
     * Sets the coordinates, checking that they are floats
     *
@@ -205,7 +230,7 @@ class XML_KML_Place extends XML_KML_Common
     * @return XML_KML_Place this objectz
     * @throws XML_KML_Exception
     */
-    public function setLinePoint($lat, $lng)
+    public function setLinePoint($lng, $lat)
     {
 
 		// Convert to floats if they are in a string

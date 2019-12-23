@@ -1,6 +1,7 @@
 # Create_KML
 
 A PHP class for creating KML code from a set of data and outputting it to a string.
+Can also export a simple GPX file.
 
 ## Usage
 
@@ -29,6 +30,7 @@ To add styles you need to create a new style object, add your style data to it a
 To add a placemark you do the same as for a styles but use a place object.  As such:
 
     // assumes you have $kml setup
+	$foldername = "Places";
 	while ( list($id,$name,$desc,$style_id,$lat,$lng) = mysql_fetch_array($result) ) {
 
 		$place = $kml->createPlace();
@@ -36,7 +38,7 @@ To add a placemark you do the same as for a styles but use a place object.  As s
 		$place->setId($id)
             ->setName($name)
 		    ->setDesc($desc)
-		    ->setFolder()
+		    ->setFolder($foldername)
 		    ->setStyle($style_id)
 		    ->setCoords($lat,$lng);
 
@@ -47,6 +49,27 @@ To add a placemark you do the same as for a styles but use a place object.  As s
 	}
 
 When the setFolder() method is used with nothing in the brackets, means that the placemark will be put in the root of the KML document.  If you want the placemark in a folder then simply enter the folder name (or variable) into the brackets.
+
+### Adding a line to the KML document
+
+To add a line you do the same as for a points but use setLinePoint instead of coords but use a place object. (See Example2) As such:
+
+    // assumes you have $kml setup
+	$foldername = "Places";
+	
+	$place = $kml->createPlace();
+
+	$place->setId($id)
+		->setName($name)
+		->setDesc($desc)
+		->setFolder($foldername)
+		->setStyle($style_id)
+		->setLinePoint($lat,$lng)
+		->setLinePoint($lat2,$lng2); // etc
+
+	$kml->addItem($place);
+
+You can also use setLinestring which takes an array: array('lat' => $lat, 'lng' => $lng)
 
 ### Outputting the KML code
 
@@ -65,7 +88,11 @@ Or force the user to download the file:
 
 	$kml->printHeader();
 	echo $kml;
+	
+Or, maybe you wish to save the code asa GPX file?
+
+	file_put_contents('output.kml', $kml.toGPX());
 
 ## Contact
 
-Problems, comments, and suggestions all welcome: [hamstar@telescum.co.nz](mailto:hamstar@telescum.co.nz)
+Problems, comments, and suggestions all welcome: [cairnswm@gmail.com](mailto:cairnswm@gmail.com)

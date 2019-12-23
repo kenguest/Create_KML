@@ -18,8 +18,8 @@
 *
 */
 
-require_once 'XML/KML/Exception.php';
-require_once 'XML/KML/Common.php';
+require_once 'Exception.php';
+require_once 'Common.php';
 
 /**
 * Class to define a place to be added to the KML class
@@ -33,8 +33,12 @@ require_once 'XML/KML/Common.php';
 class XML_KML_Place extends XML_KML_Common
 {
     private $type = 'place';
-    private $folder = '**[root]**';
-    private $id, $name, $desc, $style, $coords;
+    public $folder = '**[root]**';
+    private $id, $name, $desc, $style, $coords, $linestring;
+	
+	public function getType() {
+		return $this->type;
+	}
 
     /**
     * Encloses a string in CDATA escaping if it
@@ -190,6 +194,102 @@ class XML_KML_Place extends XML_KML_Common
     public function getCoords()
     {
         return $this->coords;
+    }
+	
+	    /**
+    * Return the coordinates of this place
+    *
+    * @return string the lat
+    */
+    public function getLat()
+    {
+		$c = $this->coords;
+		$cm = strpos($c,",");
+		return substr($c, $cm+1, 100);
+        
+    }
+	
+	    /**
+    * Return the coordinates of this place
+    *
+    * @return string the lng
+    */
+    public function getLng()
+    {
+		$c = $this->coords;
+		$cm = strpos($c,",");
+		return substr($c, 0,$cm-1);
+    }
+	
+	/**
+    * Sets the coordinates, checking that they are floats
+    *
+    * @param float $lat Latitude coordinate
+    * @param float $lng Longitude coordinate
+    *
+    * @return XML_KML_Place this objectz
+    * @throws XML_KML_Exception
+    */
+    public function setLinePoint($lng, $lat)
+    {
+
+		// Convert to floats if they are in a string
+		$lat = floatval($lat);
+		$lng = floatval($lng);
+		
+		// Check that they are floats
+		if (is_float($lat) && is_float($lng)) {
+			// Set coords
+			$this->linestring[] = array('lat' => $lat, 'lng' => $lng);
+		}
+		else
+		{
+			// Not a valid set of coordinates
+			throw new XML_KML_Exception("Invalid set of coordinates.");
+		}			
+        return $this;
+    }	
+	
+    /**
+    * Sets the coordinates, checking that they are floats
+    *
+    * @param array $points Array of Points - points are arrays of Lat/Lng array('lat' => '51.01', 'lng = '-115.08') 
+    *
+    * @return XML_KML_Place this objectz
+    * @throws XML_KML_Exception
+    */
+    public function setLinestring($points)
+    {
+		var_dump($points);
+		foreach ($points as $point)
+		{
+			// Convert to floats if they are in a string
+			$lat = floatval($point['lat']);
+			$lng = floatval($point['lng']);
+			
+			// Check that they are floats
+			if (is_float($lat) && is_float($lng)) {
+				// Set coords
+				$this->linestring .= $lat . ',' . $lng . '\n';
+				
+			}
+			else
+			{
+				// Not a valid set of coordinates
+				throw new XML_KML_Exception("Invalid set of coordinates.");
+			}			
+		}
+        return $this;
+    }	
+	
+	/**
+    * Return the linestring of this place
+    *
+    * @return string the coordinates
+    */
+    public function getLinestring()
+    {
+        return $this->linestring;
     }
     
     /**

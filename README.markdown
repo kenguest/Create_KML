@@ -1,6 +1,7 @@
 # Create_KML
 
 A PHP class for creating KML code from a set of data and outputting it to a string.
+Can also export a simple GPX file.
 
 ## Usage
 
@@ -87,6 +88,10 @@ Or force the user to download the file:
 
 	$kml->printHeader();
 	echo $kml;
+	
+Or, maybe you wish to save the code asa GPX file?
+
+	file_put_contents('output.kml', $kml.toGPX());
 
 ## Contact
 
